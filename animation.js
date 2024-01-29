@@ -51,20 +51,13 @@ class Animation {
         const options = {duration : 600, fill: 'both', easing: 'ease-out', delay: delayDuration};
         obj.animate(motion,options);
     };
-    static fadeIn(obj,delayDuration){
+    static fadeIn(obj,delayDuration, aniDuration){
+        if(aniDuration == 0 || aniDuration === undefined) aniDuration = 300;
         const motion  = [
             {opacity: 0},
             {opacity: 1}
         ];
-        const options = {duration : 300, fill: 'both', easing: 'ease-in', delay: delayDuration};
-        obj.animate(motion,options);
-    };
-    static fadeIn2(obj,delayDuration){
-        const motion  = [
-            {opacity: 0},
-            {opacity: 1}
-        ];
-        const options = {duration : 600, fill: 'both', easing: 'ease-in', delay: delayDuration};
+        const options = {duration : +aniDuration, fill: 'both', easing: 'ease-in', delay: delayDuration};
         obj.animate(motion,options);
     };
     static scale(obj, delayDuration){
@@ -120,9 +113,9 @@ class Animation {
           entries.forEach((entry)=>{
               if(entry.isIntersecting){
                   let delay = 0;
-                  let opt = '';
+                  let opt = 0;
                   entry.target.dataset.delay ? delay = entry.target.dataset.delay : 0;
-                  entry.target.dataset.opt ? opt = entry.target.dataset.opt : '';
+                  entry.target.dataset.opt ? opt = entry.target.dataset.opt : 0;
                   Animation[aniName](entry.target, delay, opt);
               };
           });
