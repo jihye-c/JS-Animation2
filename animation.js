@@ -92,6 +92,24 @@ class Animation {
         const options = {duration : 14000, fill: 'both', easing: 'linear', iterations: Infinity, delay:delayDuration};
         obj.animate(motion,options);
     };
+    static openL(obj, delayDuration, distance){
+        const motion  = [
+            {transform:`translateX(${distance}px) rotate(180deg)`},
+            {transform:`translateX(${distance}px) rotate(180deg)`, offset:0.4},
+            {transform:`translateX(0px) rotate(180deg)`}
+        ];
+        const options = {duration : 650, fill: 'both', easing: 'ease-in-out', delay: delayDuration};
+        obj.animate(motion,options);
+    }
+    static openR(obj, delayDuration, distance){
+        const motion  = [
+            {transform:`translateX(-${distance}px)`},
+            {transform:`translateX(-${distance}px)`, offset:0.4},
+            {transform:`translateX(0px)`}
+        ];
+        const options = {duration : 650, fill: 'both', easing: 'ease-in-out', delay: delayDuration};
+        obj.animate(motion,options);
+    }
 }
   const staticMethods = Object.getOwnPropertyNames(Animation).filter(
           method => typeof Animation[method] === 'function'
@@ -102,8 +120,10 @@ class Animation {
           entries.forEach((entry)=>{
               if(entry.isIntersecting){
                   let delay = 0;
+                  let opt = '';
                   entry.target.dataset.delay ? delay = entry.target.dataset.delay : 0;
-                  Animation[aniName](entry.target, delay);
+                  entry.target.dataset.opt ? opt = entry.target.dataset.opt : '';
+                  Animation[aniName](entry.target, delay, opt);
               };
           });
       });
