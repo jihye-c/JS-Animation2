@@ -1,0 +1,12 @@
+main{
+    max-width: 1180px; 
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: 0 auto;
+}
+main div{
+    width: 250px; height: 250px;
+    margin: 20px;
+    background: #ccc;
+}
